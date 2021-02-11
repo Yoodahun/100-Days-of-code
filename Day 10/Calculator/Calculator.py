@@ -32,7 +32,7 @@ print(art.logo)
 while True:
     continue_calculation = True
     first_number = float(input("What's the first number?: "))
-    print("+ \n- \n* \n/ \n")
+    print("+ \n- \n* \n/ ")
 
     while continue_calculation:
         operation = input("Pick an operation: ")
