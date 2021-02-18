@@ -4,9 +4,15 @@ the_turtle = Turtle()
 the_turtle.shape("turtle")
 the_turtle.color("purple")
 
-for _ in range(4):
-    the_turtle.forward(100)
-    the_turtle.right(90)
+for i in range(3, 20):
+    angle = 360 / i
+    for _ in range(i):
+        the_turtle.forward(50)
+        the_turtle.right(angle)
+
+
+
+
 
 
 
