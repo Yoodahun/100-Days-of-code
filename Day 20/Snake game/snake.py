@@ -26,6 +26,17 @@ class Snake:
             self.snakes.append(segment)
             starting_x_position -= 20
 
+    def extend(self):
+        self.add_segment(self.snakes[-1].position())
+
+    def add_segment(self, position):
+        segment = Turtle()
+        segment.shape("square")
+        segment.color("white")
+        segment.penup()
+        segment.goto(position)
+        self.snakes.append(segment)
+
     def move(self):
         for snake_number in range(len(self.snakes) - 1, 0, -1):  # reverse for
 
