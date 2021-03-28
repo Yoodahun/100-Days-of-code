@@ -18,8 +18,8 @@ print(birthdays_dict[today])
 if today in birthdays_dict:
     picked_template = f"letter_templates/letter_{random.randint(1, 3)}.txt"
     with open(picked_template) as letter_template:
-        letter = letter_template.read()
-        letter.replace("[NAME]", birthdays_dict[today]["name"])
+        letter = letter_template.read().replace("[NAME]", birthdays_dict[today]["name"])
+        # letter.replace("[NAME]", birthdays_dict[today]["name"])
     to_email_address = birthdays_dict[today]["email"]
 
 
