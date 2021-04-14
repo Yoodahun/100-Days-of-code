@@ -1,5 +1,5 @@
 import requests
-import datetime
+from datetime import datetime
 
 USERNAME = "dahun"
 TOKEN = ""
@@ -37,12 +37,26 @@ headers = {
 
 POST_GRAPH_ENDPOINT = f"{GRAPH_ENDPOINT}/{GRAPH_ID}"
 post_graph_params = {
-    "date":"20210413",
+    "date":datetime.today().strftime("%Y%m%d"),
     "quantity":"3"
 }
 
-response = requests.post(url=POST_GRAPH_ENDPOINT,
-                         json=post_graph_params,
-                         headers=headers
-                         )
+# response = requests.post(url=POST_GRAPH_ENDPOINT,
+#                          json=post_graph_params,
+#                          headers=headers
+#                          )
+
+PUT_GRAPH_ENDPOINT = f"{GRAPH_ENDPOINT}/{GRAPH_ID}/20210414"
+put_graph_params = {
+    "quantity":"7"
+}
+# response = requests.put(url=PUT_GRAPH_ENDPOINT,
+#                         json=put_graph_params,
+#                         headers=headers)
+
+DELETE_GRAPH_ENDPOINT = f"{GRAPH_ENDPOINT}/{GRAPH_ID}/20210414"
+
+response = requests.delete(url=DELETE_GRAPH_ENDPOINT,
+                           headers=headers)
+
 print(response.json())
