@@ -23,9 +23,9 @@ pprint(response.json()["prices"])
 for data in sheet_data:
 
     if data["iataCode"] == "":
-        data["iataCode"] = flight_search.getIataCode(data["city"])
+        data["iataCode"] = flight_search.get_iataCode(data["city"])
 
-    data_manager.updateFlightData(data)
+    data_manager.update_excel_flight_data(data)
 
 
 response = requests.get(

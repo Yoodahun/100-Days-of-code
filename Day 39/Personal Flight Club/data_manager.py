@@ -12,7 +12,7 @@ class DataManager:
         }
         self.body = {}
 
-    def updateFlightData(self, data):
+    def update_excel_flight_data(self, data):
         self.body["price"] = data
 
         response = requests.put(
