@@ -2,12 +2,15 @@ import requests
 from pprint import pprint
 from flight_search import FlightSearch
 from data_manager import DataManager
+from notification_manager import NotificationManager
+
+ORIGIN_CITY_DEPARTURE = "LON"
 
 # This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the
 # program requirements.
 flight_search = FlightSearch()
 data_manager = DataManager()
-
+notification_manager = NotificationManager()
 
 response = requests.get(
     url=data_manager.GOOGLE_SHEET_API_ENDPOINT,
@@ -18,8 +21,6 @@ response.raise_for_status()
 sheet_data = response.json()["prices"]
 pprint(response.json()["prices"])
 
-
-
 for data in sheet_data:
 
     if data["iataCode"] == "":
@@ -27,9 +28,29 @@ for data in sheet_data:
 
     data_manager.update_excel_flight_data(data)
 
-
 response = requests.get(
     url=data_manager.GOOGLE_SHEET_API_ENDPOINT,
     headers=data_manager.google_sheet_header
 )
-pprint(response.json()["prices"])
+
+for data in response.json()["prices"]:
+    search_result = flight_search.get_flight_data(
+        ORIGIN_CITY_DEPARTURE,
+        data
+    )
+
+    if search_result is None:
+        continue
+
+    if search_result.price < data["lowestPrice"]:
+        notification_manager.notification(
+            price=search_result.price,
+            origin_city= search_result.departure_city,
+            origin_airport= search_result.departure_airport_code,
+            destination_city= search_result.arrive_city,
+            destination_airport= search_result.arrive_airport_code,
+            out_date=search_result.out_date,
+            return_date=search_result.return_date
+        )
+
+
