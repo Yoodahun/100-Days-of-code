@@ -46,3 +46,14 @@ class DataManager:
         response.raise_for_status()
         print(response.json())
         print("You're in the club!")
+
+    def get_excel_user_data(self):
+
+        response = requests.get(
+            url=self.GOOGLE_USER_SHEET_API_ENDPOINT,
+            headers=self.google_sheet_header
+        )
+        response.raise_for_status()
+
+        return response.json()["users"]
+
