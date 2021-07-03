@@ -3,8 +3,8 @@ from twitterBot import  InternetSpeedTwitterBot
 
 PROMISED_DOWN = 350
 PROMISED_UP = 10
-TWITTER_USERNAME = "kawaiiPineapp"
-TWITTER_PASSWORD = "ekgns123!"
+TWITTER_USERNAME = ""
+TWITTER_PASSWORD = ""
 
 twitter_bot = InternetSpeedTwitterBot()
 
